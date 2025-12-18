@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chúc mừng sinh nhật 🎉</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- Overlay yêu cầu mật khẩu (hiển thị khi chưa unlock) -->
+  <div id="overlay" class="overlay">
+    <div class="modal">
+      <h2>Nhập mật khẩu để mở lời chúc 🎂</h2>
+      <input id="pw" type="password" placeholder="Nhập mật khẩu..." />
+      <div class="buttons">
+        <button id="btnOpen">Mở</button>
+        <button id="btnCancel">Thoát</button>
+      </div>
+      <p id="err" class="error"></p>
+    </div>
+  </div>
+
+  <!-- Nội dung chúc mừng (ẩn ban đầu) -->
+  <main id="content" class="hidden">
+    <header class="greeting">
+      <h1>Chúc mừng sinh nhật!</h1>
+      <p id="subtitle">Chúc bạn một ngày tràn ngập niềm vui, hạnh phúc và tiếng cười.</p>
+    </header>
+
+    <!-- Carousel ảnh với hiệu ứng chuyển fade -->
+    <section class="carousel">
+      <div id="slides" class="slides">
+        <!-- Thêm img tag tương ứng với ảnh trong static/images -->
+        <img src="/static/images/anh2.jpg" class="slide active" alt="ảnh 1">
+        <img src="/static/images/anh1.jpg" class="slide" alt="ảnh 2">
+        <img src="/static/images/anh3.jpg" class="slide" alt="ảnh 3">
+        <img src="/static/images/anh4.jpg" class="slide" alt="ảnh 4">
+        <img src="/static/images/anh5.jpg" class="slide" alt="ảnh 5">
+        <img src="/static/images/anh6.jpg" class="slide" alt="ảnh 6">
+        <img src="/static/images/anh7.jpg" class="slide" alt="ảnh 7">
+        <img src="/static/images/anh8.jpg" class="slide" alt="ảnh 8">
+        <img src="/static/images/anh9.jpg" class="slide" alt="ảnh 9">
+        <img src="/static/images/anh10.jpg" class="slide" alt="ảnh 10">
+      </div>
+      <div class="controls">
+        <button id="prev">❮</button>
+        <button id="next">❯</button>
+      </div>
+    </section>
+
+    <!-- Một vài dòng lời chúc có animation -->
+    <section class="messages">
+      <p class="msg">Mong mọi ước mơ của bạn thành hiện thực!</p>
+      <p class="msg">Luôn luôn mạnh khỏe, vui tươi và tràn đầy năng lượng!</p>
+      <p class="msg">Chúc bạn thuận lợi trên con đường học vấn!</p>
+      <p class="msg">Mong bạn luôn kiên trì, vững tin và hướng về phía trước!</p>
+      <p class="msg">Chúc bạn thành công trên con đường bạn đã chọn!</p>
+      <p class="msg">Happy BirthDay</p>
+    </section>
+
+    <!-- Audio (tùy chọn). -->
+   
+    <audio autoplay loop>
+  <source src="https://zingmp3.vn/bai-hat/Nhat-Lo-Sinh-Hoa-Rosie-On-Dich-Tam/ZZ0A899F.html?utm_medium=zalomsg&utm_source=dapp&utm_campaign=share" type="audio/mpeg">
+  </audio>
+  </main>
+
+   <script>
+    // Biến này được Flask truyền vào từ backend
+    const INITIAL_UNLOCKED = {{ unlocked | tojson }};
+  </script>
+
+  <script>
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+
+function nextSlide() {
+  slides[current].classList.remove('active');
+  current = (current + 1) % slides.length;
+  slides[current].classList.add('active');
+}
+
+// Chuyển slide mỗi 3 giây
+setInterval(nextSlide, 3000);
+</script>
+
+
+  <script src="/static/chucnang.js"></script>
+</body>
+</html>
